@@ -1,1 +1,92 @@
+The EBS storage is block storage designed for AWS EC2.
+
+   · An EBS volume data are persistent.
+
+   · It is a Service attached via a Network
+
+   · EBS volumes exist independently from your EC2 instances and can be retained after the associated EC2 instance has been deleted
+
+   · We can detach a volume from an EC2 instance and attach it to another instance
+
+   · An EBS volume is locked to one AZ. It can be attached only to an EC2 instance in the same AZ.
+
+· We can encrypt an EBS volume. It supports only symmetric encryption until now
+
+· The EBS volume data encryption is done in the EC2 instance, then data are transferred to the EBS volume. The result is encryption at rest and in transit
+
+· You can choose from two types of CMKs for EBS encryption: AWS managed, and Customer managed.
+
+· AWS-managed CMK is the default on Amazon EBS.
+
+· Customer-managed CMK is used when your compliance and security goals require more granular control over who can access your encrypted data.
+
+· Amazon EBS volumes aren’t encrypted by default
+
+· Encryption is supported by all EBS volume types.
+
+· An encrypted EBS volume gives an encrypted copy and an encrypted snapshot
+
+· We can only change the encryption key when creating the copy of an encrypted EBS volume
+
+· We can create an encrypted copy from an EBS volume non-encrypted by giving an encryption key in the copy operation.
+
+· To encrypt all EBS volumes in a region, enable the “Default Amazon EBS Encryption” option.
+
+· We can change dynamically the size, the performance, the volume type of EBS volumes without detaching them.
+
+· The size of an EBS volume can be only increased
+· There are two main categories of EBS volumes which are SSD-backed storage and HDD-backed storage
+
+
+· You can take a snapshot of an EBS volume.
+
+· An EBS snapshot is a point in time copy of your EBS volume.
+
+· EBS volumes snapshots are incremental copies and only blocks changed since the last EBS snapshot are stored
+
+· EBS snapshots are stored in Amazon S3. AWS uses the S3 infrastructure to store your EBS snapshots, but you cannot access them.
+
+· A snapshot or an AMI are private by default
+
+· An AMI is a copy of a full instance
+
+· EBS multi-attach is possible, but it is not allowed for all types of EC2 instances
+
+· EBS snapshots can be manual or automated.
+
+· Amazon EBS snapshots are automatically encrypted with the same encryption key that was used to encrypt the source EBS volume.
+
+· Snapshots of unencrypted EBS volumes are also unencrypted.
+
+· For snapshots, we must carry about their retention period because their storage is chargeable
+
+· EBS automatic snapshots can be launched by Cloud Watch event and is done volume by volume or can be done by Amazon Data Lifecycle Manager (DLM)
+
+· DLM can snapshot one or more volumes basing on tags
+
+· DLM is used to automate the creation, the retention, and the deletion of EBS snapshots and AMIs
+
+· An EBS volume is attached to only one AZ. If you want to have this volume in another AZ, you have to create a snapshot of this volume then create an EBS volume in the AZ destination basing on this snapshot
+
+· If you want to have this volume in another region, you have to create its snapshot, copy it to the other region then create an EBS volume in the destination region basing on this snapshot
+
+· Use cases of copying snapshots across regions can be geographic expansion, disaster recovery, migration to another region, and audit requirement.
+
+· We can share EBS snapshots. The share conditions depend on the encryption status of the snapshot
+
+· If the snapshot is non-encrypted, we can change it to publicly accessed and share it with anyone. Also, we can keep it private and share it with some accounts
+
+· If the snapshot is encrypted, it can’t be shared publicly but it can be only shared with specified accounts. In this case, the encryption key has to be shared also with other accounts and you have to give these accounts permission to access it
+
+· The option “EBS optimized” gives the best performance for your EBS volumes. It can’t be enabled for all instance types. It provides additional and dedicated capacity for Amazon EBS I/O.
+
+· Raid 0 is used to increase performance
+
+· Raid 1 is used to increase fault tolerance
+
+· To get optimal performance from an EBS volume, enable “EBS optimized”, use RAID 0, and use a modern Linux kernel
+
+
+
+
 
